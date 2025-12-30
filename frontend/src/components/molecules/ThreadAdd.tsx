@@ -42,9 +42,9 @@ export function ThreadAdd({
   const [image, setImage] = useState<File | null>(null);
   const [base64Image, setBase64Image] = useState<string | null>(null);
   const { data } = useSelector((state: RootState) => state.userById);
-  const baseURL: string = import.meta.env.VITE_BASE_URL;
+  const blobURL: string = import.meta.env.VITE_BLOB_URL;
   const userUrl =
-    data?.photo_profile && `${baseURL}/uploads/${data.photo_profile}`;
+    data?.photo_profile && `${blobURL}/user/${data.photo_profile}`;
 
   function handleImageChange(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.length ? e.target.files[0] : null;
