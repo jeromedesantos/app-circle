@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
+    "build": "bunx prisma generate && tsc",
     "dev": "ts-node-dev --loader ts-node/esm src/app.ts",
     "start": "node dist/app.js",
     "seed": "ts-node src/connections/seed.ts",
