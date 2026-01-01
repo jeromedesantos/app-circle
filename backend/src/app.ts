@@ -15,7 +15,7 @@ import reply from "./routes/reply";
 import like from "./routes/like";
 import follow from "./routes/follow";
 import swaggerJSDoc from "swagger-jsdoc";
-import swaggerUi from "swagger-ui-express";
+import * as swaggerUi from "swagger-ui-express";
 
 config();
 
@@ -46,7 +46,7 @@ app.use("/api/v1", thread);
 app.use("/api/v1", reply);
 app.use("/api/v1", like);
 app.use("/api/v1", follow);
-app.use("*catchall", notFound);
+app.use(notFound);
 app.use(errorHandler);
 
 server.listen(port, () =>
