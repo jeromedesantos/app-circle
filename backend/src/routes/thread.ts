@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { auth, isExist } from "../middlewares/auth";
+import { auth, isExist, authWithUserCheck } from "../middlewares/auth";
 import {
   getThreads,
   getThreadById,
@@ -11,9 +11,9 @@ import { saveFile } from "../middlewares/file";
 
 const router = Router();
 
-router.get("/thread", auth, getThreads);
-router.get("/thread/:id", auth, getThreadById);
-router.post("/thread", auth, upload.single("image"), saveFile, postThread);
-router.delete("/thread/:id", auth, isExist("thread"), deleteThread);
+router.get("/thread", authWithUserCheck, getThreads);
+router.get("/thread/:id", authWithUserCheck, getThreadById);
+router.post("/thread", authWithUserCheck, upload.single("image"), saveFile, postThread);
+router.delete("/thread/:id", authWithUserCheck, isExist("thread"), deleteThread);
 
 export default router;

@@ -13,6 +13,30 @@ export function auth(req: Request, res: Response, next: NextFunction) {
   next();
 }
 
+export async function authWithUserCheck(req: Request, res: Response, next: NextFunction) {
+  try {
+    const { token } = req.cookies;
+    if (token === undefined) {
+      throw appError("You must Login to access!", 401);
+    }
+    const decoded = verifyToken(token);
+    
+    // Verify user exists in database
+    const user = await prisma.user.findUnique({
+      where: { id: (decoded as any).id },
+    });
+    
+    if (!user) {
+      throw appError("User not found in database!", 401);
+    }
+    
+    (req as any).user = decoded as any;
+    next();
+  } catch (err) {
+    next(err);
+  }
+}
+
 export function nonAuth(req: Request, res: Response, next: NextFunction) {
   const { token } = req.cookies;
   if (token) {

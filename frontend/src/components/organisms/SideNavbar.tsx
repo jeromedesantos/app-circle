@@ -24,8 +24,8 @@ export function SideNavbar() {
   }
 
   return (
-    <div className="w-full max-w-xs">
-      <div className="fixed z-30 px-10 py-10 w-full max-w-xs h-full bg-zinc-900">
+    <div className="w-60 lg:w-xs xl:w-250">
+      <div className="fixed z-30 xl:px-10 py-10 w-25 xl:w-xs h-full bg-zinc-900">
         {isError && (
           <Alert variant="danger">
             {isAxiosError(error) && error.response
@@ -34,7 +34,7 @@ export function SideNavbar() {
           </Alert>
         )}
         <div className="flex flex-col gap-15">
-          <Logo className="text-5xl" />
+          <Logo className="text-5xl xl:block hidden" />
           <div className="flex flex-col flex-1 gap-70">
             <div className="flex flex-col w-fit gap-5">
               <Link
@@ -42,21 +42,21 @@ export function SideNavbar() {
                 className={`text-zinc-300 font-bold text-lg flex items-center gap-2 px-10 py-2 rounded-2xl hover:bg-zinc-800 duration-300`}
               >
                 <House />
-                <p>Home</p>
+                <p className="xl:block hidden">Home</p>
               </Link>
               <Link
                 to="/search"
                 className="text-zinc-300 font-bold text-lg flex items-center gap-2 px-10 py-2 rounded-2xl hover:bg-zinc-800 duration-300"
               >
                 <UserRoundSearch />
-                <p>Search</p>
+                <p className="xl:block hidden">Search</p>
               </Link>
               <Link
                 to="/follows"
                 className="text-zinc-300 font-bold text-lg flex items-center gap-2 px-10 py-2 rounded-2xl hover:bg-zinc-800 duration-300"
               >
                 <Heart />
-                <p>Follows</p>
+                <p className="xl:block hidden">Follows</p>
               </Link>
               {/* <Link
                 to="/"
@@ -75,7 +75,9 @@ export function SideNavbar() {
                 disabled={isPending}
               >
                 <LogOut />
-                <p>{isPending ? "Logging out..." : "Logout"}</p>
+                <p className="xl:block hidden">
+                  {isPending ? "Logging out..." : "Logout"}
+                </p>
               </button>
             </div>
           </div>
